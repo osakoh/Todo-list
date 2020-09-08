@@ -16,6 +16,9 @@ function loadEventListeners() {
     form.addEventListener('submit', addTask);
     // delete task event
     taskList.addEventListener('click', deleteTask);
+    // clear task list event
+    clearBtn.addEventListener('click', clearTaskList);
+
     
 }
 
@@ -57,4 +60,15 @@ function deleteTask(task) {
         
 
     }
+}
+
+// clear task list function
+function clearTaskList() {
+    // taskList.innerHTML = ''; 1st method
+
+    // 2nd method: using while loop to remove each element. This is faster
+    while (taskList.firstChild) { // while theres an element in the list
+        taskList.removeChild(taskList.firstChild);  // remove that element
+    }
+
 }
