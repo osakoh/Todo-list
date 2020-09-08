@@ -18,7 +18,8 @@ function loadEventListeners() {
     taskList.addEventListener('click', deleteTask);
     // clear task list event
     clearBtn.addEventListener('click', clearTaskList);
-
+    // filter task event
+    filter.addEventListener('keyup', filterTask);
     
 }
 
@@ -71,4 +72,22 @@ function clearTaskList() {
         taskList.removeChild(taskList.firstChild);  // remove that element
     }
 
+}
+
+// filter task function
+function filterTask(e) {
+    const text = e.target.value.toLowerCase(); // get values from the input and convert to lower case
+    // console.log(text);
+
+    // get all items with 'collection-item' class; foreach is used because querySelectorAll returns a nodelist
+    // but if getElementsByClassName returns a html collection which should be converted to an array so as to use forEach()
+    document.querySelectorAll('.collection-item').forEach
+    (function(task) {
+            const item = task.firstChild.textContent;
+            if (item.toLowerCase().indexOf(text) != -1) {  // 
+                task.style.display = 'block';
+            } else {
+                task.style.display = 'none';
+            }
+        });
 }
