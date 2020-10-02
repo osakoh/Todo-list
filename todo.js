@@ -1,8 +1,8 @@
 // UI variables
 const form = document.getElementById('task-form');
 const taskInput = document.getElementById('task');
-const filter = document.getElementById('filter');
-const taskList = document.querySelector('.collection');
+const filterInput = document.getElementById('filter');
+const taskListUL = document.querySelector('.collection');
 const clearBtn = document.querySelector('.clear-tasks');
 
 
@@ -15,11 +15,11 @@ function loadEventListeners() {
     // Add task event
     form.addEventListener('submit', addTask);
     // delete task event
-    taskList.addEventListener('click', deleteTask);
+    taskListUL.addEventListener('click', deleteTask);
     // clear task list event
     clearBtn.addEventListener('click', clearTaskList);
     // filter task event
-    filter.addEventListener('keyup', filterTask);
+    filterInput.addEventListener('keyup', filterTask);
     
 }
 
@@ -28,13 +28,14 @@ function addTask(e) {
     if(taskInput.value === '') {
         alert('No task added!');
     } else {
-        // create li element
+        // create li element   <!-- <li class="collection-item"><a><i></i></a></li> -->
         const li = document.createElement('li');
         // add a class
         li.className = 'collection-item';
-        // create text node and append to li
-        li.appendChild(document.createTextNode(taskInput.value));
-        // create link element
+        // create text node and append to li. Text inside the 'li'
+        const liTextNode = document.createTextNode(taskInput.value);
+        li.appendChild(liTextNode);
+        // create new link element
         const link = document.createElement('a');
         // add class, secondary-content: shifts elements to the right in materialise
         link.className = 'delete-item secondary-content';
@@ -44,7 +45,7 @@ function addTask(e) {
         li.appendChild(link);
 
         // append li to ul
-        taskList.appendChild(li);
+        taskListUL.appendChild(li);
         // clear input
         taskInput.value = '';
     }
@@ -68,8 +69,8 @@ function clearTaskList() {
     // taskList.innerHTML = ''; 1st method
 
     // 2nd method: using while loop to remove each element. This is faster
-    while (taskList.firstChild) { // while theres an element in the list
-        taskList.removeChild(taskList.firstChild);  // remove that element
+    while (taskListUL.firstChild) { // while there's an element (li) in the list
+        taskListUL.removeChild(taskListUL.firstChild);  // remove that element (li)
     }
 
 }
@@ -81,8 +82,7 @@ function filterTask(e) {
 
     // get all items with 'collection-item' class; foreach is used because querySelectorAll returns a nodelist
     // but if getElementsByClassName returns a html collection which should be converted to an array so as to use forEach()
-    document.querySelectorAll('.collection-item').forEach
-    (function(task) {
+    document.querySelectorAll('.collection-item').forEach(function(task) {
             const item = task.firstChild.textContent;
             if (item.toLowerCase().indexOf(text) != -1) {  // 
                 task.style.display = 'block';
