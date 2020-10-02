@@ -2,7 +2,6 @@
 ---
 ### Technologies utilised
 - [x] HTML
-- [x] CSS3
 - [x] JavaScript
 - [x] Materialize
 - [x] Font Awesome 4.7.0
