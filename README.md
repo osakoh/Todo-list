@@ -8,6 +8,6 @@
 ---
 *Screenshots* 
 
-![Screenshots](img/screenshot.png)  
+![Screenshots](screenshot.png)  
 
 
